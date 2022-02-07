@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:responsive_sizer/responsive_sizer.dart';
 
 import 'components/auth_profile_bar.dart';
 import 'components/news_content_widget.dart';
@@ -12,6 +13,20 @@ class NewsDetailScreen extends StatelessWidget {
       appBar: AppBar(
         // 타이틀 : Published in ${publication.name}
         title: Text('Published in Android Developers'),
+      ),
+      bottomNavigationBar: SizedBox(
+        height: 10.h,
+        child: Row(
+          children: [
+            IconButton(onPressed: () {}, icon: const Icon(Icons.favorite)),
+            IconButton(onPressed: () {}, icon: const Icon(Icons.bookmark)),
+            IconButton(onPressed: () {}, icon: const Icon(Icons.share)),
+            Expanded(child: Container()),
+            IconButton(
+                onPressed: () {},
+                icon: const Icon(Icons.font_download_outlined)),
+          ],
+        ),
       ),
       body: ListView(
         padding: const EdgeInsets.all(16),

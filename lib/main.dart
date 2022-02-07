@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:jet_news_app/presentation/news_home/news_home_screen.dart';
+import 'package:responsive_sizer/responsive_sizer.dart';
 
 void main() {
   runApp(const MyApp());
@@ -16,7 +17,9 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.red,
       ),
-      home: const NewsHomeScreen(),
+      home: ResponsiveSizer(
+        builder: (context, orientation, deviceType) => const NewsHomeScreen(),
+      ),
     );
   }
 }
