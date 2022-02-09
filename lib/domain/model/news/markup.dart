@@ -10,6 +10,27 @@ class Markup {
     required this.end,
     required this.type,
   });
+
+  factory Markup.fromJson(Map<String, dynamic> json) {
+    return Markup(
+      href: json['href'] as String,
+      start: json['start'] as int,
+      end: json['end'] as int,
+      type: parseToMarkupType(json['type']),
+    );
+  }
 }
 
 enum MarkupType { link, bold, code, italic }
+
+MarkupType parseToMarkupType(String type) {
+  if (type == 'Link') {
+    return MarkupType.link;
+  } else if (type == 'Bold') {
+    return MarkupType.bold;
+  } else if (type == 'Code') {
+    return MarkupType.code;
+  } else {
+    return MarkupType.italic;
+  }
+}

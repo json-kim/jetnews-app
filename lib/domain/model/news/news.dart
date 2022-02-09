@@ -28,4 +28,22 @@ class News {
     required this.author,
     required this.paragraphs,
   });
+
+  factory News.fromJson(Map<String, dynamic> json) {
+    return News(
+      id: json['id'],
+      title: json['title'],
+      subtitle: json['subtitle'],
+      url: json['url'],
+      imageId: json['imageId'],
+      imageThumbId: json['imageThumbId'],
+      date: json['date'],
+      readTimeMinutes: json['readTimeMinutes'],
+      publication: Publication.fromJson(json['publication']),
+      author: Author.fromJson(json['author']),
+      paragraphs: (json['paragraphs'] as List)
+          .map((e) => Paragraph.fromJson(json))
+          .toList(),
+    );
+  }
 }
