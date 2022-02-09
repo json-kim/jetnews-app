@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:jet_news_app/core/di/provider_setting.dart';
 import 'package:jet_news_app/presentation/news_home/news_home_screen.dart';
+import 'package:provider/provider.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 
-void main() {
-  runApp(const MyApp());
+void main() async {
+  final providers = await providerSetting();
+
+  runApp(MultiProvider(providers: providers, child: const MyApp()));
 }
 
 class MyApp extends StatelessWidget {
