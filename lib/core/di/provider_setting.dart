@@ -13,14 +13,15 @@ import 'package:jet_news_app/domain/usecase/news/news_bookmark_use_case.dart';
 import 'package:jet_news_app/domain/usecase/news/news_favorite_use_case.dart';
 import 'package:jet_news_app/domain/usecase/news/news_load_use_case.dart';
 import 'package:jet_news_app/domain/usecase/news/news_share_use_case.dart';
+import 'package:jet_news_app/presentation/news_home/news_home_view_model.dart';
 import 'package:provider/provider.dart';
 import 'package:provider/single_child_widget.dart';
 
 Future<List<SingleChildWidget>> providerSetting() async {
   await Hive.initFlutter();
-  Hive.openBox('interest');
-  Hive.openBox('bookmark');
-  Hive.openBox('favorite');
+  Hive.openBox<int>('interest');
+  Hive.openBox<String>('bookmark');
+  Hive.openBox<String>('favorite');
 
   final List<SingleChildWidget> independentProvider = [
     Provider<NewsFakeDataSource>(create: (context) => NewsFakeDataSource()),
@@ -59,7 +60,11 @@ Future<List<SingleChildWidget>> providerSetting() async {
         update: (context, repository, _) => InterestCheckUseCase(repository)),
   ];
 
-  List<SingleChildWidget> viewModels = [];
+  List<SingleChildWidget> viewModels = [
+    ChangeNotifierProvider(
+        create: (context) => NewsHomeViewModel(context.read<NewsLoadUseCase>(),
+            context.read<NewsBookmarkUseCase>())),
+  ];
 
   List<SingleChildWidget> globalProviders = [
     ...independentProvider,

@@ -7,11 +7,10 @@ class NewsFakeDataSource {
   Future<Result<List<News>>> requestNews(int page) async {
     final List jsonResult = jsonDecode(fakeNewsData);
 
-    try {
-      final List<News> newsList =
-          jsonResult.map((json) => News.fromJson(json)).toList();
-      return Result.success(newsList);
-    } catch (e) {
+    final List<News> newsList =
+        jsonResult.map((json) => News.fromJson(json)).toList();
+    return Result.success(newsList);
+    try {} catch (e) {
       return Result.error('$runtimeType.requestNews : 에러 발생 \n$e');
     }
   }
@@ -49,7 +48,7 @@ const fakeNewsData = '''
       },
       {
         "markups": [],
-        "text": "include \u0027:app\u0027\ninclude \u0027:features:module1\u0027\ninclude \u0027:features:module2\u0027\ninclude \u0027:features:module3\u0027\ninclude \u0027:features:module4\u0027",
+        "text": "include \\u0027:app\\u0027\\ninclude \\u0027:features:module1\\u0027\\ninclude \\u0027:features:module2\\u0027\\ninclude \\u0027:features:module3\\u0027\\ninclude \\u0027:features:module4\\u0027",
         "type": "CodeBlock"
       },
       {
@@ -91,12 +90,12 @@ const fakeNewsData = '''
       },
       {
         "markups": [],
-        "text": "include \u0027:app\u0027\ninclude \u0027:module1\u0027\ninclude \u0027:module1\u0027\ninclude \u0027:module1\u0027\ninclude \u0027:module1\u0027",
+        "text": "include \\u0027:app\\u0027\\ninclude \\u0027:module1\\u0027\\ninclude \\u0027:module1\\u0027\\ninclude \\u0027:module1\\u0027\\ninclude \\u0027:module1\\u0027",
         "type": "CodeBlock"
       },
       {
         "markups": [],
-        "text": "// Set a custom path for the four features modules.\n// This avoid to have an empty \"features\" module in  Android Studio.\nproject(\":module1\").projectDir\u003dnew File(rootDir, \"features/module1\")\nproject(\":module2\").projectDir\u003dnew File(rootDir, \"features/module2\")\nproject(\":module3\").projectDir\u003dnew File(rootDir, \"features/module3\")\nproject(\":module4\").projectDir\u003dnew File(rootDir, \"features/module4\")",
+        "text": "// Set a custom path for the four features modules.\\n// This avoid to have an empty \\"features\\" module in  Android Studio.\\nproject(\\":module1\\").projectDir\\u003dnew File(rootDir, \\"features/module1\\")\\nproject(\\":module2\\").projectDir\\u003dnew File(rootDir, \\"features/module2\\")\\nproject(\\":module3\\").projectDir\\u003dnew File(rootDir, \\"features/module3\\")\\nproject(\\":module4\\").projectDir\\u003dnew File(rootDir, \\"features/module4\\")",
         "type": "CodeBlock"
       },
       {
@@ -135,7 +134,7 @@ const fakeNewsData = '''
         "markups": [
           {
             "end": 47,
-            "href": "https://www.youtube.com/watch?v\u003dihF-PwDfRZ4\u0026list\u003dPLWz5rJ2EKKc9FfSQIRXEWyWpHD6TtwxMM\u0026index\u003d32\u0026t\u003d0s",
+            "href": "https://www.youtube.com/watch?v\\u003dihF-PwDfRZ4\\u0026list\\u003dPLWz5rJ2EKKc9FfSQIRXEWyWpHD6TtwxMM\\u0026index\\u003d32\\u0026t\\u003d0s",
             "start": 0,
             "type": "Link"
           }
@@ -385,7 +384,7 @@ const fakeNewsData = '''
             "type": "Bold"
           }
         ],
-        "text": "@Inject @MinimumBalance lateinit var minimumBalance: BigDecimal \n// @MinimumBalance is ignored!",
+        "text": "@Inject @MinimumBalance lateinit var minimumBalance: BigDecimal \\n// @MinimumBalance is ignored!",
         "type": "CodeBlock"
       },
       {
@@ -490,7 +489,7 @@ const fakeNewsData = '''
             "type": "Link"
           }
         ],
-        "text": "Kotlin compiles generics with wildcards to make Kotlin APIs work with Java. These are generated when a type appears as a parameter (more info here) or as fields. For example, a Kotlin List\u003cFoo\u003e parameter shows up as List\u003c? super Foo\u003e in Java.",
+        "text": "Kotlin compiles generics with wildcards to make Kotlin APIs work with Java. These are generated when a type appears as a parameter (more info here) or as fields. For example, a Kotlin List\\u003cFoo\\u003e parameter shows up as List\\u003c? super Foo\\u003e in Java.",
         "type": "Text"
       },
       {
@@ -536,7 +535,7 @@ const fakeNewsData = '''
             "type": "Bold"
           }
         ],
-        "text": "class MyVMFactory @Inject constructor(\n  private val vmMap: Map\u003cString, @JvmSuppressWildcards Provider\u003cViewModel\u003e\u003e\n) { \n    ... \n}",
+        "text": "class MyVMFactory @Inject constructor(\\n  private val vmMap: Map\\u003cString, @JvmSuppressWildcards Provider\\u003cViewModel\\u003e\\u003e\\n) { \\n    ... \\n}",
         "type": "CodeBlock"
       },
       {
@@ -996,7 +995,7 @@ const fakeNewsData = '''
             "type": "Bold"
           }
         ],
-        "text": "public inline fun \u003cT, R\u003e Iterable\u003cT\u003e.map(transform: (T) -\u003e R): List\u003cR\u003e {\n  return mapTo(ArrayList\u003cR\u003e(collectionSizeOrDefault(10)), transform)\n}",
+        "text": "public inline fun \\u003cT, R\\u003e Iterable\\u003cT\\u003e.map(transform: (T) -\\u003e R): List\\u003cR\\u003e {\\n  return mapTo(ArrayList\\u003cR\\u003e(collectionSizeOrDefault(10)), transform)\\n}",
         "type": "CodeBlock"
       },
       {
@@ -1095,7 +1094,7 @@ const fakeNewsData = '''
             "type": "Bold"
           }
         ],
-        "text": "public fun \u003cT, R\u003e Sequence\u003cT\u003e.map(transform: (T) -\u003e R): Sequence\u003cR\u003e{      \n   return TransformingSequence(this, transform)\n}",
+        "text": "public fun \\u003cT, R\\u003e Sequence\\u003cT\\u003e.map(transform: (T) -\\u003e R): Sequence\\u003cR\\u003e{      \\n   return TransformingSequence(this, transform)\\n}",
         "type": "CodeBlock"
       },
       {
@@ -1117,7 +1116,7 @@ const fakeNewsData = '''
       },
       {
         "markups": [],
-        "text": "public inline fun \u003cT\u003e Sequence\u003cT\u003e.first(predicate: (T) -\u003e Boolean): T {\n   for (element in this) if (predicate(element)) return element\n   throw NoSuchElementException(“Sequence contains no element matching the predicate.”)\n}",
+        "text": "public inline fun \\u003cT\\u003e Sequence\\u003cT\\u003e.first(predicate: (T) -\\u003e Boolean): T {\\n   for (element in this) if (predicate(element)) return element\\n   throw NoSuchElementException(“Sequence contains no element matching the predicate.”)\\n}",
         "type": "CodeBlock"
       },
       {
@@ -1144,7 +1143,7 @@ const fakeNewsData = '''
             "type": "Bold"
           }
         ],
-        "text": "internal class TransformingIndexedSequence\u003cT, R\u003e \nconstructor(private val sequence: Sequence\u003cT\u003e, private val transformer: (Int, T) -\u003e R) : Sequence\u003cR\u003e {",
+        "text": "internal class TransformingIndexedSequence\\u003cT, R\\u003e \\nconstructor(private val sequence: Sequence\\u003cT\\u003e, private val transformer: (Int, T) -\\u003e R) : Sequence\\u003cR\\u003e {",
         "type": "CodeBlock"
       },
       {
@@ -1160,7 +1159,7 @@ const fakeNewsData = '''
             "type": "Bold"
           }
         ],
-        "text": "override fun iterator(): Iterator\u003cR\u003e \u003d object : Iterator\u003cR\u003e {\n   …\n   override fun next(): R {\n     return transformer(checkIndexOverflow(index++), iterator.next())\n   }\n   …\n}",
+        "text": "override fun iterator(): Iterator\\u003cR\\u003e \\u003d object : Iterator\\u003cR\\u003e {\\n   …\\n   override fun next(): R {\\n     return transformer(checkIndexOverflow(index++), iterator.next())\\n   }\\n   …\\n}",
         "type": "CodeBlock"
       },
       {
@@ -1412,7 +1411,7 @@ const fakeNewsData = '''
       },
       {
         "markups": [],
-        "text": "include \u0027:app\u0027\ninclude \u0027:features:module1\u0027\ninclude \u0027:features:module2\u0027\ninclude \u0027:features:module3\u0027\ninclude \u0027:features:module4\u0027",
+        "text": "include \\u0027:app\\u0027\\ninclude \\u0027:features:module1\\u0027\\ninclude \\u0027:features:module2\\u0027\\ninclude \\u0027:features:module3\\u0027\\ninclude \\u0027:features:module4\\u0027",
         "type": "CodeBlock"
       },
       {
@@ -1454,12 +1453,12 @@ const fakeNewsData = '''
       },
       {
         "markups": [],
-        "text": "include \u0027:app\u0027\ninclude \u0027:module1\u0027\ninclude \u0027:module1\u0027\ninclude \u0027:module1\u0027\ninclude \u0027:module1\u0027",
+        "text": "include \\u0027:app\\u0027\\ninclude \\u0027:module1\\u0027\\ninclude \\u0027:module1\\u0027\\ninclude \\u0027:module1\\u0027\\ninclude \\u0027:module1\\u0027",
         "type": "CodeBlock"
       },
       {
         "markups": [],
-        "text": "// Set a custom path for the four features modules.\n// This avoid to have an empty \"features\" module in  Android Studio.\nproject(\":module1\").projectDir\u003dnew File(rootDir, \"features/module1\")\nproject(\":module2\").projectDir\u003dnew File(rootDir, \"features/module2\")\nproject(\":module3\").projectDir\u003dnew File(rootDir, \"features/module3\")\nproject(\":module4\").projectDir\u003dnew File(rootDir, \"features/module4\")",
+        "text": "// Set a custom path for the four features modules.\\n// This avoid to have an empty \\"features\\" module in  Android Studio.\\nproject(\\":module1\\").projectDir\\u003dnew File(rootDir, \\"features/module1\\")\\nproject(\\":module2\\").projectDir\\u003dnew File(rootDir, \\"features/module2\\")\\nproject(\\":module3\\").projectDir\\u003dnew File(rootDir, \\"features/module3\\")\\nproject(\\":module4\\").projectDir\\u003dnew File(rootDir, \\"features/module4\\")",
         "type": "CodeBlock"
       },
       {
@@ -1498,7 +1497,7 @@ const fakeNewsData = '''
         "markups": [
           {
             "end": 47,
-            "href": "https://www.youtube.com/watch?v\u003dihF-PwDfRZ4\u0026list\u003dPLWz5rJ2EKKc9FfSQIRXEWyWpHD6TtwxMM\u0026index\u003d32\u0026t\u003d0s",
+            "href": "https://www.youtube.com/watch?v\\u003dihF-PwDfRZ4\\u0026list\\u003dPLWz5rJ2EKKc9FfSQIRXEWyWpHD6TtwxMM\\u0026index\\u003d32\\u0026t\\u003d0s",
             "start": 0,
             "type": "Link"
           }
@@ -1748,7 +1747,7 @@ const fakeNewsData = '''
             "type": "Bold"
           }
         ],
-        "text": "@Inject @MinimumBalance lateinit var minimumBalance: BigDecimal \n// @MinimumBalance is ignored!",
+        "text": "@Inject @MinimumBalance lateinit var minimumBalance: BigDecimal \\n// @MinimumBalance is ignored!",
         "type": "CodeBlock"
       },
       {
@@ -1853,7 +1852,7 @@ const fakeNewsData = '''
             "type": "Link"
           }
         ],
-        "text": "Kotlin compiles generics with wildcards to make Kotlin APIs work with Java. These are generated when a type appears as a parameter (more info here) or as fields. For example, a Kotlin List\u003cFoo\u003e parameter shows up as List\u003c? super Foo\u003e in Java.",
+        "text": "Kotlin compiles generics with wildcards to make Kotlin APIs work with Java. These are generated when a type appears as a parameter (more info here) or as fields. For example, a Kotlin List\\u003cFoo\\u003e parameter shows up as List\\u003c? super Foo\\u003e in Java.",
         "type": "Text"
       },
       {
@@ -1899,7 +1898,7 @@ const fakeNewsData = '''
             "type": "Bold"
           }
         ],
-        "text": "class MyVMFactory @Inject constructor(\n  private val vmMap: Map\u003cString, @JvmSuppressWildcards Provider\u003cViewModel\u003e\u003e\n) { \n    ... \n}",
+        "text": "class MyVMFactory @Inject constructor(\\n  private val vmMap: Map\\u003cString, @JvmSuppressWildcards Provider\\u003cViewModel\\u003e\\u003e\\n) { \\n    ... \\n}",
         "type": "CodeBlock"
       },
       {
@@ -2361,7 +2360,7 @@ const fakeNewsData = '''
             "type": "Bold"
           }
         ],
-        "text": "public inline fun \u003cT, R\u003e Iterable\u003cT\u003e.map(transform: (T) -\u003e R): List\u003cR\u003e {\n  return mapTo(ArrayList\u003cR\u003e(collectionSizeOrDefault(10)), transform)\n}",
+        "text": "public inline fun \\u003cT, R\\u003e Iterable\\u003cT\\u003e.map(transform: (T) -\\u003e R): List\\u003cR\\u003e {\\n  return mapTo(ArrayList\\u003cR\\u003e(collectionSizeOrDefault(10)), transform)\\n}",
         "type": "CodeBlock"
       },
       {
@@ -2460,7 +2459,7 @@ const fakeNewsData = '''
             "type": "Bold"
           }
         ],
-        "text": "public fun \u003cT, R\u003e Sequence\u003cT\u003e.map(transform: (T) -\u003e R): Sequence\u003cR\u003e{      \n   return TransformingSequence(this, transform)\n}",
+        "text": "public fun \\u003cT, R\\u003e Sequence\\u003cT\\u003e.map(transform: (T) -\\u003e R): Sequence\\u003cR\\u003e{      \\n   return TransformingSequence(this, transform)\\n}",
         "type": "CodeBlock"
       },
       {
@@ -2482,7 +2481,7 @@ const fakeNewsData = '''
       },
       {
         "markups": [],
-        "text": "public inline fun \u003cT\u003e Sequence\u003cT\u003e.first(predicate: (T) -\u003e Boolean): T {\n   for (element in this) if (predicate(element)) return element\n   throw NoSuchElementException(“Sequence contains no element matching the predicate.”)\n}",
+        "text": "public inline fun \\u003cT\\u003e Sequence\\u003cT\\u003e.first(predicate: (T) -\\u003e Boolean): T {\\n   for (element in this) if (predicate(element)) return element\\n   throw NoSuchElementException(“Sequence contains no element matching the predicate.”)\\n}",
         "type": "CodeBlock"
       },
       {
@@ -2509,7 +2508,7 @@ const fakeNewsData = '''
             "type": "Bold"
           }
         ],
-        "text": "internal class TransformingIndexedSequence\u003cT, R\u003e \nconstructor(private val sequence: Sequence\u003cT\u003e, private val transformer: (Int, T) -\u003e R) : Sequence\u003cR\u003e {",
+        "text": "internal class TransformingIndexedSequence\\u003cT, R\\u003e \\nconstructor(private val sequence: Sequence\\u003cT\\u003e, private val transformer: (Int, T) -\\u003e R) : Sequence\\u003cR\\u003e {",
         "type": "CodeBlock"
       },
       {
@@ -2525,7 +2524,7 @@ const fakeNewsData = '''
             "type": "Bold"
           }
         ],
-        "text": "override fun iterator(): Iterator\u003cR\u003e \u003d object : Iterator\u003cR\u003e {\n   …\n   override fun next(): R {\n     return transformer(checkIndexOverflow(index++), iterator.next())\n   }\n   …\n}",
+        "text": "override fun iterator(): Iterator\\u003cR\\u003e \\u003d object : Iterator\\u003cR\\u003e {\\n   …\\n   override fun next(): R {\\n     return transformer(checkIndexOverflow(index++), iterator.next())\\n   }\\n   …\\n}",
         "type": "CodeBlock"
       },
       {

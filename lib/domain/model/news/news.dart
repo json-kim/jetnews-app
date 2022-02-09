@@ -30,6 +30,7 @@ class News {
   });
 
   factory News.fromJson(Map<String, dynamic> json) {
+    final authorJson = json['metadata']['author'];
     return News(
       id: json['id'],
       title: json['title'],
@@ -37,10 +38,12 @@ class News {
       url: json['url'],
       imageId: json['imageId'],
       imageThumbId: json['imageThumbId'],
-      date: json['date'],
-      readTimeMinutes: json['readTimeMinutes'],
+      date: json['date'] ?? '',
+      readTimeMinutes: json['readTimeMinutes'] ?? 0,
       publication: Publication.fromJson(json['publication']),
-      author: Author.fromJson(json['author']),
+      author: authorJson == null
+          ? Author(name: 'unknown', url: '')
+          : Author.fromJson(authorJson),
       paragraphs: (json['paragraphs'] as List)
           .map((e) => Paragraph.fromJson(json))
           .toList(),

@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:jet_news_app/domain/usecase/news/data/news_data.dart';
 
 class NewsListTile extends StatelessWidget {
+  final NewsData newsData;
   final void Function() onTap;
   final void Function() btnTap;
 
   const NewsListTile({
+    required this.newsData,
     required this.onTap,
     required this.btnTap,
     Key? key,
@@ -24,18 +27,20 @@ class NewsListTile extends StatelessWidget {
 
           // 뉴스 타이틀
           title: Text(
-            'A little thing about Android module paths',
+            newsData.news.title,
             maxLines: 2,
             overflow: TextOverflow.ellipsis,
           ),
 
-          // 뉴스 부제
-          subtitle: Text('Pietro Maggi'),
+          // 뉴스 작가
+          subtitle: Text(newsData.news.author.name),
 
           // 구독 버튼
           trailing: IconButton(
             onPressed: btnTap,
-            icon: const Icon(Icons.bookmark_outline),
+            icon: newsData.isBookmark
+                ? const Icon(Icons.bookmark)
+                : const Icon(Icons.bookmark_outline),
           ),
 
           // 클릭 콜백

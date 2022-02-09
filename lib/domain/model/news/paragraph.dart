@@ -13,11 +13,13 @@ class Paragraph {
 
   factory Paragraph.fromJson(Map<String, dynamic> json) {
     return Paragraph(
-      text: json['text'] as String,
-      type: parseToParagraphType(json['type'] as String),
-      markups: (json['markups'] as List)
-          .map((json) => Markup.fromJson(json))
-          .toList(),
+      text: json['text'] ?? '',
+      type: parseToParagraphType(json['type'] ?? 'text'),
+      markups: json['markups'] == null
+          ? []
+          : (json['markups'] as List)
+              .map((json) => Markup.fromJson(json))
+              .toList(),
     );
   }
 }

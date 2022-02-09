@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:jet_news_app/domain/usecase/news/data/news_data.dart';
 
 class NewsListCard extends StatelessWidget {
+  final NewsData newsData;
   final void Function() onTap;
 
   const NewsListCard({
+    required this.newsData,
     required this.onTap,
     Key? key,
   }) : super(key: key);
@@ -30,8 +33,13 @@ class NewsListCard extends StatelessWidget {
               // 뉴스 제목, 작가 이름
               Expanded(
                 child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text('A little thing about Android module paths'),
+                    Text(newsData.news.title),
+                    Text(
+                      newsData.news.author.name,
+                      style: TextStyle(color: Colors.grey),
+                    ),
                   ],
                 ),
               ),

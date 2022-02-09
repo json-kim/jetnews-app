@@ -19,7 +19,7 @@ class NewsLoadUseCase implements UseCase<List<NewsData>, int> {
       bookmarks = await getBookmark(1);
       favorites = await getFavorites(1);
     } catch (e) {
-      return Result.error('$runtimeType : 데이터 가져오기 에러 발생');
+      return Result.error('$runtimeType : 데이터 가져오기 에러 발생 \n$e');
     }
 
     final newsResult = await _newsRepository.getNews(page);

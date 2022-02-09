@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:jet_news_app/domain/usecase/news/data/news_data.dart';
 
 class TopStoryCard extends StatelessWidget {
-  // final News news;
+  final NewsData newsData;
   final void Function() onTap;
 
   const TopStoryCard({
-    // required this.news
+    required this.newsData,
     required this.onTap,
     Key? key,
   }) : super(key: key);
@@ -39,14 +40,14 @@ class TopStoryCard extends StatelessWidget {
 
           // 타이틀
           Text(
-            'A little thing about Android module paths',
+            newsData.news.title,
             style: Theme.of(context).textTheme.headline5,
           ),
           const SizedBox(height: 2),
 
           // 서브타이틀
           Text(
-            'How to configure your module paths, instead of using Gradle’s default.',
+            newsData.news.subtitle,
             style: Theme.of(context)
                 .textTheme
                 .subtitle1!
@@ -55,12 +56,12 @@ class TopStoryCard extends StatelessWidget {
           const SizedBox(height: 4),
 
           // 작가 이름
-          Text('Pietro Maggi'),
+          Text(newsData.news.author.name),
           const SizedBox(height: 2),
 
           // 날짜
           Text(
-            'Aug 3, 2019',
+            newsData.news.date,
             style: TextStyle(color: Colors.black.withOpacity(0.6)),
           ),
         ],
