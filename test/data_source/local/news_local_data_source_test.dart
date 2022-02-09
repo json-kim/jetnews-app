@@ -3,7 +3,7 @@ import 'package:hive/hive.dart';
 import 'package:jet_news_app/data/data_source/local/news_local_data_source.dart';
 
 void main() {
-  group('news local datasource를 테스트합니다.', () {
+  group('news local data source 를 테스트합니다.', () {
     Hive.init('path');
     final localDataSource = NewsLocalDataSource();
 

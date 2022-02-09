@@ -42,7 +42,7 @@ class InterestLoadUseCase implements UseCase<InterestSet, int> {
   }
 
   Future<List<InterestSection>> getInterestSection(int page) async {
-    final result = await _interestRepository.getInterestSections(page);
+    final result = await _interestRepository.getTopicInterest(page);
 
     return result.when(success: (interestSection) {
       return interestSection;

@@ -3,7 +3,7 @@ import 'package:jet_news_app/domain/model/interest/interest.dart';
 import 'package:jet_news_app/domain/model/interest/interest_section.dart';
 
 abstract class InterestRepository {
-  Future<Result<List<InterestSection>>> getInterestSections(int page);
+  Future<Result<List<InterestSection>>> getTopicInterest(int page);
 
   Future<Result<List<Interest>>> getPeopleInterest(int page);
 
