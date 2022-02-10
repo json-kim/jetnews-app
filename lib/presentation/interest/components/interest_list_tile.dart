@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:jet_news_app/domain/usecase/interest/data/interest_data.dart';
 
 class InterestListTile extends StatelessWidget {
+  final InterestData interestData;
   final void Function() onTap;
 
   const InterestListTile({
+    required this.interestData,
     required this.onTap,
     Key? key,
   }) : super(key: key);
@@ -16,19 +19,23 @@ class InterestListTile extends StatelessWidget {
           contentPadding: EdgeInsets.zero,
           leading: Image.network(
               'https://github.com/android/compose-samples/blob/main/JetNews/app/src/main/res/drawable-nodpi/placeholder_1_1.png?raw=true'),
-          title: Text('Jetpack Compose'),
+          title: Text(interestData.interest.title),
           trailing: InkWell(
             onTap: onTap,
+            borderRadius: BorderRadius.circular(25),
             child: Container(
               decoration: BoxDecoration(
                 shape: BoxShape.circle,
                 border:
                     Border.all(color: Colors.grey.withOpacity(0.3), width: 2),
               ),
-              child: const CircleAvatar(
+              child: CircleAvatar(
                 radius: 25,
-                backgroundColor: Colors.white,
-                child: Icon(Icons.add),
+                backgroundColor:
+                    interestData.isChecked ? Colors.red : Colors.white,
+                child: interestData.isChecked
+                    ? const Icon(Icons.check, color: Colors.white)
+                    : const Icon(Icons.add),
               ),
             ),
           ),

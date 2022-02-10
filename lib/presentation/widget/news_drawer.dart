@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:jet_news_app/domain/usecase/interest/interest_check_use_case.dart';
+import 'package:jet_news_app/domain/usecase/interest/interest_load_use_case.dart';
 import 'package:jet_news_app/presentation/interest/interest_screen.dart';
+import 'package:jet_news_app/presentation/interest/interest_view_model.dart';
 import 'package:jet_news_app/presentation/news_home/news_home_screen.dart';
+import 'package:provider/provider.dart';
 
 class NewsDrawer extends StatelessWidget {
   const NewsDrawer({Key? key}) : super(key: key);
@@ -48,9 +52,17 @@ class NewsDrawer extends StatelessWidget {
                 ),
                 InkWell(
                   onTap: () {
-                    Navigator.of(context).pushReplacement(MaterialPageRoute(
-                      builder: (context) => InterestScreen(),
-                    ));
+                    Navigator.of(context).pushReplacement(
+                      MaterialPageRoute(
+                        builder: (context) => ChangeNotifierProvider(
+                          create: (context) => InterestViewModel(
+                            context.read<InterestLoadUseCase>(),
+                            context.read<InterestCheckUseCase>(),
+                          ),
+                          child: const InterestScreen(),
+                        ),
+                      ),
+                    );
                   },
                   child: Padding(
                     padding: const EdgeInsets.all(8.0),

@@ -1,7 +1,8 @@
+import 'package:equatable/equatable.dart';
 import 'package:jet_news_app/domain/model/interest/interest.dart';
 import 'package:jet_news_app/domain/model/interest/interest_section.dart';
 
-class InterestData {
+class InterestData implements Equatable {
   final Interest interest;
   final bool isChecked;
 
@@ -12,6 +13,12 @@ class InterestData {
         interest: interest ?? this.interest,
         isChecked: isChecked ?? this.isChecked);
   }
+
+  @override
+  List<Object?> get props => [interest.id];
+
+  @override
+  bool? get stringify => true;
 }
 
 class InterestSectionData {
@@ -26,6 +33,11 @@ class InterestSectionData {
         .toList();
     return InterestSectionData(section.title, interests);
   }
+
+  InterestSectionData copyWith({String? title, List<InterestData>? interests}) {
+    return InterestSectionData(
+        title ?? this.title, interests ?? this.interests);
+  }
 }
 
 class InterestSet {
@@ -33,7 +45,7 @@ class InterestSet {
   final List<InterestData> peopleInterests;
   final List<InterestData> pubInterests;
 
-  InterestSet(this.interestSections, this.peopleInterests, this.pubInterests);
+  InterestSet._(this.interestSections, this.peopleInterests, this.pubInterests);
 
   factory InterestSet.build(List<InterestSection> sections,
       List<Interest> peoples, List<Interest> pubs, List<int> ids) {
@@ -46,6 +58,16 @@ class InterestSet {
         .map((e) => InterestData(interest: e, isChecked: ids.contains(e.id)))
         .toList();
 
-    return InterestSet(interestSections, peopleInterests, pubInterests);
+    return InterestSet._(interestSections, peopleInterests, pubInterests);
+  }
+
+  InterestSet copyWith(
+      {List<InterestSectionData>? interestSections,
+      List<InterestData>? peopleInterests,
+      List<InterestData>? pubInterests}) {
+    return InterestSet._(
+        interestSections ?? this.interestSections,
+        peopleInterests ?? this.peopleInterests,
+        pubInterests ?? this.pubInterests);
   }
 }
