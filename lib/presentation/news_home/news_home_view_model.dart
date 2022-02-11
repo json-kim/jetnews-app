@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:jet_news_app/domain/model/news/news.dart';
 import 'package:jet_news_app/domain/usecase/news/news_bookmark_use_case.dart';
+import 'package:jet_news_app/domain/usecase/news/news_favorite_use_case.dart';
 import 'package:jet_news_app/domain/usecase/news/news_load_use_case.dart';
 import 'package:jet_news_app/presentation/news_home/news_home_event.dart';
 import 'package:jet_news_app/presentation/news_home/news_home_ui_event.dart';
@@ -12,8 +13,10 @@ import 'news_home_state.dart';
 class NewsHomeViewModel with ChangeNotifier {
   final NewsLoadUseCase _newsLoadUseCase;
   final NewsBookmarkUseCase _newsBookmarkUseCase;
+  final NewsFavoriteUseCase _newsFavoriteUseCase;
 
-  NewsHomeViewModel(this._newsLoadUseCase, this._newsBookmarkUseCase) {
+  NewsHomeViewModel(this._newsLoadUseCase, this._newsBookmarkUseCase,
+      this._newsFavoriteUseCase) {
     _loadNews();
   }
 
@@ -29,7 +32,10 @@ class NewsHomeViewModel with ChangeNotifier {
   int _page = 0;
 
   void onEvent(NewsHomeEvent event) {
-    event.when(loadNews: _loadNews, bookmarkNews: _bookmarkNews);
+    event.when(
+        loadNews: _loadNews,
+        bookmarkNews: _bookmarkNews,
+        favoriteNews: _favoriteNews);
   }
 
   Future<void> _loadNews() async {
@@ -68,6 +74,28 @@ class NewsHomeViewModel with ChangeNotifier {
       debugPrint(message);
       _streamController
           .add(const NewsHomeUiEvent.showSnackBar('북마크 등록에 실패했습니다.'));
+    });
+
+    notifyListeners();
+  }
+
+  Future<void> _favoriteNews(String newsId) async {
+    final result = await _newsFavoriteUseCase(newsId);
+
+    result.when(success: (isFavorite) {
+      final newsData = _state.newsData;
+      final index =
+          newsData.indexWhere((newsData) => newsData.news.id == newsId);
+      final data = newsData[index];
+      final newData = data.copyWith(isFavorite: isFavorite);
+      newsData[index] = newData;
+
+      _state = _state.copyWith(newsData: newsData);
+    }, error: (message) {
+      // TODO: 좋아요 등록 실패, 스낵바
+      debugPrint(message);
+      _streamController
+          .add(const NewsHomeUiEvent.showSnackBar('좋아요 등록에 실패했습니다.'));
     });
 
     notifyListeners();

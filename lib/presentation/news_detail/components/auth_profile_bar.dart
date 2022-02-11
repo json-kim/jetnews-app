@@ -1,7 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:jet_news_app/domain/model/news/author.dart';
 
 class AuthorProfileBar extends StatelessWidget {
+  final Author author;
+  final String date;
+
   const AuthorProfileBar({
+    required this.author,
+    required this.date,
     Key? key,
   }) : super(key: key);
 
@@ -11,10 +17,10 @@ class AuthorProfileBar extends StatelessWidget {
       padding: const EdgeInsets.symmetric(vertical: 16),
       child: Row(
         children: [
-          CircleAvatar(
+          const CircleAvatar(
             radius: 25,
             backgroundImage: NetworkImage(
-                'https://miro.medium.com/fit/c/176/176/1*FP1XQtY1tqwxvdRB_R6ecQ.jpeg'),
+                'https://cdn.pixabay.com/photo/2016/07/22/16/54/portrait-1535266_960_720.jpg'),
           ),
           const SizedBox(width: 16),
           Expanded(
@@ -22,10 +28,10 @@ class AuthorProfileBar extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 // 작가 이름
-                Text('Pietro Maggi'),
+                Text(author.name),
 
                 // 날짜
-                Text('Aug 3, 2019'),
+                Text(date),
               ],
             ),
           ),

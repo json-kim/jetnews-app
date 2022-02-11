@@ -62,8 +62,10 @@ Future<List<SingleChildWidget>> providerSetting() async {
 
   List<SingleChildWidget> viewModels = [
     ChangeNotifierProvider(
-        create: (context) => NewsHomeViewModel(context.read<NewsLoadUseCase>(),
-            context.read<NewsBookmarkUseCase>())),
+        create: (context) => NewsHomeViewModel(
+            context.read<NewsLoadUseCase>(),
+            context.read<NewsBookmarkUseCase>(),
+            context.read<NewsFavoriteUseCase>())),
   ];
 
   List<SingleChildWidget> globalProviders = [

@@ -5,12 +5,13 @@ import 'package:jet_news_app/domain/model/news/news.dart';
 
 class NewsFakeDataSource {
   Future<Result<List<News>>> requestNews(int page) async {
-    final List jsonResult = jsonDecode(fakeNewsData);
+    try {
+      final List jsonResult = jsonDecode(fakeNewsData);
 
-    final List<News> newsList =
-        jsonResult.map((json) => News.fromJson(json)).toList();
-    return Result.success(newsList);
-    try {} catch (e) {
+      final List<News> newsList =
+          jsonResult.map((json) => News.fromJson(json)).toList();
+      return Result.success(newsList);
+    } catch (e) {
       return Result.error('$runtimeType.requestNews : 에러 발생 \n$e');
     }
   }

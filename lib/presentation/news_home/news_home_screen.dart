@@ -2,7 +2,11 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:jet_news_app/domain/usecase/news/data/news_data.dart';
+import 'package:jet_news_app/domain/usecase/news/news_bookmark_use_case.dart';
+import 'package:jet_news_app/domain/usecase/news/news_favorite_use_case.dart';
+import 'package:jet_news_app/presentation/interest/interest_view_model.dart';
 import 'package:jet_news_app/presentation/news_detail/news_detail_screen.dart';
+import 'package:jet_news_app/presentation/news_detail/news_detail_view_model.dart';
 import 'package:jet_news_app/presentation/news_home/news_home_event.dart';
 import 'package:jet_news_app/presentation/news_home/news_home_state.dart';
 import 'package:jet_news_app/presentation/widget/news_drawer.dart';
@@ -48,11 +52,22 @@ class _NewsHomeScreenState extends State<NewsHomeScreen> {
   }
 
   void moveToDetailPage(NewsData newsData) {
-    Navigator.of(context).push(
+    Navigator.of(context)
+        .push(
       MaterialPageRoute(
-        builder: (context) => const NewsDetailScreen(),
+        builder: (context) =>
+            ChangeNotifierProxyProvider<NewsHomeViewModel, NewsDetailViewModel>(
+                create: (context) => NewsDetailViewModel(
+                    context.read<NewsHomeViewModel>(), newsData),
+                update: (context, homeViewModel, previous) =>
+                    NewsDetailViewModel(
+                        homeViewModel, previous?.state.newsData ?? newsData),
+                child: const NewsDetailScreen()),
       ),
-    );
+    )
+        .then((_) {
+      context.read<NewsHomeViewModel>().onEvent(const NewsHomeEvent.loadNews());
+    });
   }
 
   @override

@@ -45,7 +45,7 @@ class News {
           ? Author(name: 'unknown', url: '')
           : Author.fromJson(authorJson),
       paragraphs: (json['paragraphs'] as List)
-          .map((e) => Paragraph.fromJson(json))
+          .map((e) => Paragraph.fromJson(e))
           .toList(),
     );
   }

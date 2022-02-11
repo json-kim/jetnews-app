@@ -12,8 +12,15 @@ class Markup {
   });
 
   factory Markup.fromJson(Map<String, dynamic> json) {
+    final con = Markup(
+      href: json['href'] ?? '',
+      start: json['start'] as int,
+      end: json['end'] as int,
+      type: parseToMarkupType(json['type']),
+    );
+
     return Markup(
-      href: json['href'] as String,
+      href: json['href'] ?? '',
       start: json['start'] as int,
       end: json['end'] as int,
       type: parseToMarkupType(json['type']),
